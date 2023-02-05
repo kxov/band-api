@@ -28,5 +28,9 @@ services:
         tags:
             - { name: controller.argument_value_resolver, priority: 99 }
 
+    App\Infrastructure\Listener\ApiExceptionListener:
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception, priority: 1 }
+
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

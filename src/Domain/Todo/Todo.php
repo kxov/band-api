@@ -6,6 +6,7 @@ namespace App\Domain\Todo;
 
 use App\Domain\TodoList\TodoList;
 use App\Domain\User\User;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -79,4 +80,10 @@ class Todo
     {
         return $this->todoList;
     }
+
+    public function edit(string $name): void
+    {
+        $this->name = $name;
+    }
 }
+
