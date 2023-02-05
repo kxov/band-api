@@ -17,9 +17,9 @@ class TodoRepository implements TodoRepositoryInterface
         $this->entityManager = $managerRegistry->getManagerForClass(Todo::class);
     }
 
-    public function add(Todo $product): void
+    public function add(Todo $todo): void
     {
-        $this->entityManager->persist($product);
+        $this->entityManager->persist($todo);
         $this->entityManager->flush();
     }
 

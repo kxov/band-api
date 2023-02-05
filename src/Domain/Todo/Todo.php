@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Todo;
 
+use App\Domain\TodoList\TodoList;
 use App\Domain\User\User;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -34,10 +35,17 @@ class Todo
      */
     private User $user;
 
+    /**
+     * @var TodoList[]|ArrayCollection
+     * @ORM\OneToMany(targetEntity="App\Domain\TodoList\TodoList", mappedBy="todo", orphanRemoval=true, cascade={"persist"})
+     */
+    private $todoList;
+
     public function __construct(User $user, string $name)
     {
         $this->user = $user;
         $this->name = $name;
+        $this->todoList = new ArrayCollection();
     }
 
     /**
@@ -62,5 +70,13 @@ class Todo
     public function getUser(): User
     {
         return $this->user;
+    }
+
+    /**
+     * @return ArrayCollection|TodoList[]
+     */
+    public function getTodoList(): ArrayCollection|array
+    {
+        return $this->todoList;
     }
 }
