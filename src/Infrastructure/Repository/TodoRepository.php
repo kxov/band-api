@@ -40,7 +40,7 @@ class TodoRepository implements TodoRepositoryInterface
 
     public function get(int $id): Todo
     {
-        /** @var Todo $comment */
+        /** @var Todo $todo */
         if (!$todo = $this->repository->find($id)) {
             throw new ModelNotFoundException('Todo is not found.');
         }

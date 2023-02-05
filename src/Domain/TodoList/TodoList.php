@@ -79,4 +79,10 @@ class TodoList
     {
         return $this->todo;
     }
+
+    public function edit(string $name, bool $done): void
+    {
+        $this->name = $name;
+        $this->done = $done;
+    }
 }

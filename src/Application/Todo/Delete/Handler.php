@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 namespace App\Application\Todo\Delete;
+
 use App\Domain\Todo\TodoRepositoryInterface;
 
 class Handler
