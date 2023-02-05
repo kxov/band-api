@@ -1,5 +1,11 @@
 controllers:
     resource:
-        path: ../src/UI/HTTP/API/
-        namespace: App\UI\HTTP\API
+        path: ../src/UI/HTTP/
+        namespace: App\UI\HTTP\
     type: attribute
+
+gesdinet_jwt_refresh_token:
+    path: /api/auth/token/refresh
+
+api_login_check:
+    path: /api/auth/token/login

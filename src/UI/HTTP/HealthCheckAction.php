@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\UI\HTTP\API;
+namespace App\UI\HTTP;
 
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/health', name: 'health')]
 

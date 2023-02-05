@@ -4,13 +4,15 @@ declare(strict_types=1);
 
 namespace App\Domain\User;
 
+use App\Domain\Security\Service\UserPasswordHasherInterface;
+use App\Domain\Security\AuthUserInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity()
  * @ORM\Table(name="`user`")
  */
-class User
+class User implements AuthUserInterface
 {
     /**
      * @ORM\Id()
@@ -33,10 +35,14 @@ class User
      */
     private ?string $password = null;
 
-    public function __construct(string $email, ?string $password)
+    public function __construct(string $email)
     {
         $this->email = $email;
-        $this->password = $password;
+    }
+
+    public function getId(): int
+    {
+        return $this->id;
     }
 
     public function getEmail(): string
@@ -47,5 +53,31 @@ class User
     public function getPassword(): ?string
     {
         return $this->password;
+    }
+
+    public function getRoles(): array
+    {
+        return [
+            'ROLE_USER',
+        ];
+    }
+
+    public function eraseCredentials()
+    {
+        // TODO: Implement eraseCredentials() method.
+    }
+
+    public function getUserIdentifier(): string
+    {
+        return $this->email;
+    }
+
+    public function setPassword(?string $password, UserPasswordHasherInterface $passwordHasher): void
+    {
+        if (is_null($password)) {
+            $this->password = null;
+        }
+
+        $this->password = $passwordHasher->hash($this, $password);
     }
 }

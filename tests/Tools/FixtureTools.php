@@ -7,7 +7,7 @@ namespace App\Tests\Tools;
 use App\Domain\User\User;
 use Liip\TestFixturesBundle\Services\DatabaseToolCollection;
 use Liip\TestFixturesBundle\Services\DatabaseTools\AbstractDatabaseTool;
-use tests\Resource\Fixture\UserFixture;
+use App\Tests\Resource\Fixture\UserFixture;
 
 trait FixtureTools
 {
