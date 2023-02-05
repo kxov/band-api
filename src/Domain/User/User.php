@@ -41,7 +41,11 @@ class User implements AuthUserInterface
      * @var Todo[]|ArrayCollection
      * @ORM\OneToMany(targetEntity="App\Domain\Todo\Todo", mappedBy="user", orphanRemoval=true, cascade={"persist"})
      */
-    private ArrayCollection $todos;
+    private $todos;
+
+    /**
+     * @return ArrayCollection
+     */
 
     public function __construct(string $email)
     {
@@ -88,5 +92,10 @@ class User implements AuthUserInterface
         }
 
         $this->password = $passwordHasher->hash($this, $password);
+    }
+
+    public function getTodos(): ArrayCollection
+    {
+        return $this->todos;
     }
 }
