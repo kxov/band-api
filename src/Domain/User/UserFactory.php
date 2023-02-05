@@ -10,7 +10,6 @@ class UserFactory
     public function __construct(private readonly UserPasswordHasherInterface $passwordHasher)
     {
     }
-
     public function create(string $email, string $password): User
     {
         $user = new User($email);

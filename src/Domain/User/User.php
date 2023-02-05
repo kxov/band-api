@@ -6,7 +6,9 @@ namespace App\Domain\User;
 
 use App\Domain\Security\Service\UserPasswordHasherInterface;
 use App\Domain\Security\AuthUserInterface;
+use App\Domain\Todo\Todo;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity()
@@ -35,9 +37,16 @@ class User implements AuthUserInterface
      */
     private ?string $password = null;
 
+    /**
+     * @var Todo[]|ArrayCollection
+     * @ORM\OneToMany(targetEntity="App\Domain\Todo\Todo", mappedBy="user", orphanRemoval=true, cascade={"persist"})
+     */
+    private ArrayCollection $todos;
+
     public function __construct(string $email)
     {
         $this->email = $email;
+        $this->todos = new ArrayCollection();
     }
 
     public function getId(): int
