@@ -9,7 +9,6 @@ use App\Domain\TodoList\TodoListRepositoryInterface;
 class Handler
 {
     private TodoListRepositoryInterface $todoListRepository;
-
     public function __construct(TodoListRepositoryInterface $todoListRepository)
     {
         $this->todoListRepository = $todoListRepository;
