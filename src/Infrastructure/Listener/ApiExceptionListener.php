@@ -7,6 +7,7 @@ namespace App\Infrastructure\Listener;
 use App\Infrastructure\Exception\ApiException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
+
 class ApiExceptionListener
 {
     /**

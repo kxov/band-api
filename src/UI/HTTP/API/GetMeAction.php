@@ -7,6 +7,7 @@ namespace App\UI\HTTP\API;
 use App\Domain\Security\UserFetcherInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
+
 #[Route('/api/users/me', methods: ['GET'])]
 class GetMeAction
 {
