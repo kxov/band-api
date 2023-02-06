@@ -1,68 +1,46 @@
-##################
-# Variables
-##################
+up: docker-up
+down: docker-down
+restart: docker-down docker-up
 
-DOCKER_COMPOSE = docker-compose -f ./docker/docker-compose.yml
-DOCKER_COMPOSE_PHP_FPM_EXEC = ${DOCKER_COMPOSE} exec -u www-data php-fpm
+init: docker-down-clear docker-pull docker-build docker-up v-init test
 
-##################
-# Docker compose
-##################
-
-dc_build:
-	${DOCKER_COMPOSE} build
-
-dc_start:
-	${DOCKER_COMPOSE} start
-
-dc_stop:
-	${DOCKER_COMPOSE} stop
-
-dc_up:
-	${DOCKER_COMPOSE} up -d --remove-orphans
-
-dc_ps:
-	${DOCKER_COMPOSE} ps
-
-dc_logs:
-	${DOCKER_COMPOSE} logs -f
-
-dc_down:
-	${DOCKER_COMPOSE} down -v --rmi=all --remove-orphans
-
-
-##################
-# App
-##################
-
-app_bash:
-	${DOCKER_COMPOSE} exec -u www-data php-fpm bash
+v-init: composer-install #migrations-install
 
 test:
-	${DOCKER_COMPOSE_PHP_FPM_EXEC} bin/phpunit
+	docker-compose run --rm php-cli php bin/phpunit
 
-##################
-# Database
-##################
+fixer-check:
+	docker-compose run --rm php-cli vendor/bin/phpcs --standard=PSR12 src --ignore=src/Infrastructure/Migrations/
 
-db_migrate:
-	${DOCKER_COMPOSE} exec -u www-data php-fpm bin/console doctrine:migrations:migrate --no-interaction
-db_diff:
-	${DOCKER_COMPOSE} exec -u www-data php-fpm bin/console doctrine:migrations:diff --no-interaction
+fixer-fix:
+	docker-compose run --rm php-cli vendor/bin/phpcbf --standard=PSR12 src
 
-##################
-# Static code analysis
-##################
+psalm:
+	docker-compose run --rm php-cli vendor/bin/psalm --show-info=false
 
-phpstan:
-	${DOCKER_COMPOSE_PHP_FPM_EXEC} vendor/bin/phpstan analyse src tests -c phpstan.neon
+composer-install:
+	docker-compose run --rm php-cli composer install
 
-deptrac:
-	${DOCKER_COMPOSE_PHP_FPM_EXEC} vendor/bin/deptrac analyze --config-file=deptrac-layers.yaml
-	${DOCKER_COMPOSE_PHP_FPM_EXEC} vendor/bin/deptrac analyze --config-file=deptrac-modules.yaml
+migrations-install:
+	docker-compose run --rm php-cli php bin/console doctrine:migrations:migrate --no-interaction
 
-cs_fix:
-	${DOCKER_COMPOSE_PHP_FPM_EXEC} vendor/bin/php-cs-fixer fix
+migrations-diff:
+	docker-compose run --rm php-cli php bin/console doctrine:migrations:diff
 
-cs_fix_diff:
-	${DOCKER_COMPOSE_PHP_FPM_EXEC} vendor/bin/php-cs-fixer fix --dry-run --diff
+fixtures-load:
+	docker-compose run --rm php-cli php bin/console doctrine:fixtures:load --no-interaction
+
+docker-up:
+	docker-compose up -d
+
+docker-down:
+	docker-compose down --remove-orphans
+
+docker-down-clear:
+	docker-compose down -v --remove-orphans
+
+docker-pull:
+	docker-compose pull
+
+docker-build:
+	docker-compose build
