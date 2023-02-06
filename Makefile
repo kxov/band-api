@@ -4,7 +4,7 @@ restart: docker-down docker-up
 
 init: docker-down-clear docker-pull docker-build docker-up v-init test
 
-v-init: composer-install #migrations-install
+v-init: composer-install migrations-install
 
 test:
 	docker-compose run --rm php-cli php bin/phpunit

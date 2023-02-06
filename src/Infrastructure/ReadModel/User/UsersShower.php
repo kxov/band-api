@@ -24,11 +24,11 @@ class UsersShower
                 't.name',
                 't.id as todoId'
             )
-            ->from('public.user', 'u')
-            ->leftJoin('u', 'public.todo', 't', 'u.id = t.user_id')
+            ->from('user', 'u')
+            ->join('u', 'todo', 't', 'u.id = t.user_id')
             ->orderBy('id')
-            ->execute();
+            ->executeQuery();
 
-        return $stmt->fetchAll();
+        return $stmt->fetchAllAssociative();
     }
 }
