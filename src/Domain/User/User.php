@@ -14,7 +14,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @ORM\Entity()
  * @ORM\Table(name="`user`")
  */
-class User implements AuthUserInterface
+class User implements AuthUserInterface, \JsonSerializable
 {
     /**
      * @ORM\Id()
@@ -97,5 +97,21 @@ class User implements AuthUserInterface
     public function getTodos(): ArrayCollection
     {
         return $this->todos;
+    }
+
+    public function jsonSerialize(): array
+    {
+        $user = [
+            'id' => $this->id,
+            'name' => $this->email,
+            'todos' => []
+        ];
+
+        foreach($this->todos as $todo)
+        {
+            $user['todos'][] = $todo->jsonSerialize();
+        }
+
+        return $user;
     }
 }

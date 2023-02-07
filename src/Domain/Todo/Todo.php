@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity()
  * @ORM\Table(name="`todo`")
  */
-class Todo
+class Todo implements \JsonSerializable
 {
     /**
      * @ORM\Id()
@@ -84,6 +84,14 @@ class Todo
     public function edit(string $name): void
     {
         $this->name = $name;
+    }
+
+    public function jsonSerialize(): array
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name
+        ];
     }
 }
 

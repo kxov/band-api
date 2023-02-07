@@ -13,7 +13,9 @@ class UserController
 {
     private UsersShower $usersShower;
 
-    public function __construct(UsersShower $usersShower)
+    public function __construct(
+        UsersShower $usersShower
+    )
     {
         $this->usersShower = $usersShower;
     }
@@ -22,7 +24,7 @@ class UserController
     public function list(): JsonResponse
     {
         try {
-            $list = $this->usersShower->allList();
+            $list = $this->usersShower->getAllList();
         } catch (\Exception $e) {
             throw new ApiException($e->getMessage());
         }
