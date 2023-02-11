@@ -30,6 +30,9 @@ migrations-diff:
 fixtures-load:
 	docker-compose run --rm php-cli php bin/console doctrine:fixtures:load --no-interaction
 
+schema-validate:
+	docker-compose run --rm php-cli php bin/console doctrine:schema:validate
+
 docker-up:
 	docker-compose up -d
 

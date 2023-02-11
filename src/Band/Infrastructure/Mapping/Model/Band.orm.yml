@@ -1,0 +1,24 @@
+App\Band\Domain\Model\Band:
+    type: entity
+    table: band
+#    repositoryClass: Infrastructure\Model\DoctrinePromoActionUsageRepository
+#    indexes:
+#        idx_customer_promo:
+#            columns:
+#                - customer_Id
+#                - promo_action_id
+    id:
+        id:
+            type: integer
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            nullable: false
+        dateCreate:
+            type: date_immutable
+            nullable: false

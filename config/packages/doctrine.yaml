@@ -14,27 +14,32 @@ doctrine:
             User:
                 is_bundle: false
                 type: annotation
-                dir: '%kernel.project_dir%/src/Domain/User'
-                prefix: 'App\Domain\User'
+                dir: '%kernel.project_dir%/src/User/Domain/Model'
+                prefix: 'App\User\Domain\Model'
                 alias: User
             Todo:
                 is_bundle: false
                 type: annotation
-                dir: '%kernel.project_dir%/src/Domain/Todo'
-                prefix: 'App\Domain\Todo'
+                dir: '%kernel.project_dir%/src/Todo/Domain/Model'
+                prefix: 'App\Todo\Domain\Model'
                 alias: Todo
             TodoList:
                 is_bundle: false
                 type: annotation
-                dir: '%kernel.project_dir%/src/Domain/TodoList'
-                prefix: 'App\Domain\TodoList'
+                dir: '%kernel.project_dir%/src/TodoList/Domain/Model'
+                prefix: 'App\TodoList\Domain\Model'
                 alias: TodoList
             RefreshToken:
                 is_bundle: false
                 type: annotation
-                dir: '%kernel.project_dir%/src/Domain/Security'
-                prefix: 'App\Domain\Security'
+                dir: '%kernel.project_dir%/src/Shared/Domain/Model'
+                prefix: 'App\Shared\Domain\Model'
                 alias: RefreshToken
+            Band:
+                is_bundle: false
+                type: yml
+                prefix: 'App\Band\Domain\Model'
+                dir: '%kernel.project_dir%/src/Band/Infrastructure/Mapping/Model'
 
 #when@test:
 #    doctrine:

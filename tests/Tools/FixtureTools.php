@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Tests\Tools;
 
-use App\Domain\User\User;
+use App\Tests\Resource\Fixture\UserFixture;
+use App\User\Domain\Model\User;
 use Liip\TestFixturesBundle\Services\DatabaseToolCollection;
 use Liip\TestFixturesBundle\Services\DatabaseTools\AbstractDatabaseTool;
-use App\Tests\Resource\Fixture\UserFixture;
 
 trait FixtureTools
 {

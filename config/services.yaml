@@ -20,15 +20,23 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
 
-    App\UI\HTTP\API\:
-        resource: '../src/UI/HTTP/API/*'
+    App\User\Infrastructure\Controller\:
+        resource: '../src/User/Infrastructure/Controller/'
         tags: [ 'controller.service_arguments' ]
 
-    App\Infrastructure\ArgumentResolver\RequestApiResolver:
+    App\TodoList\Infrastructure\Controller\:
+        resource: '../src/TodoList/Infrastructure/Controller/'
+        tags: [ 'controller.service_arguments' ]
+
+    App\Todo\Infrastructure\Controller\:
+        resource: '../src/Todo/Infrastructure/Controller/'
+        tags: [ 'controller.service_arguments' ]
+
+    App\Shared\Infrastructure\ArgumentResolver\CommandResolver:
         tags:
             - { name: controller.argument_value_resolver, priority: 99 }
 
-    App\Infrastructure\Listener\ApiExceptionListener:
+    App\Shared\Infrastructure\Listener\ApiExceptionListener:
         tags:
             - { name: kernel.event_listener, event: kernel.exception, priority: 1 }
 
