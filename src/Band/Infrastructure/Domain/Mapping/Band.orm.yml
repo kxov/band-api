@@ -1,0 +1,31 @@
+App\Band\Domain\Model\Band:
+    type: entity
+    table: band
+    repositoryClass: App\Band\Infrastructure\Domain\Repository\DoctrineBandRepository
+    id:
+        id:
+            type: integer
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            nullable: false
+        dateCreate:
+            type: date_immutable
+            nullable: false
+    manyToMany:
+        genres:
+            targetEntity: App\Band\Domain\Model\Genre
+            joinTable:
+                name: band_genre
+                joinColumns:
+                    band_id:
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    genre_id:
+                        referencedColumnName: id
+            cascade: [ persist ]

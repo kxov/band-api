@@ -1,0 +1,16 @@
+App\Band\Domain\Model\Genre:
+    type: entity
+    table: genre
+    repositoryClass: App\Band\Infrastructure\Domain\Repository\DoctrineGenreRepository
+    id:
+        id:
+            type: integer
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            nullable: false

@@ -39,7 +39,7 @@ doctrine:
                 is_bundle: false
                 type: yml
                 prefix: 'App\Band\Domain\Model'
-                dir: '%kernel.project_dir%/src/Band/Infrastructure/Mapping/Model'
+                dir: '%kernel.project_dir%/src/Band/Infrastructure/Domain/Mapping'
 
 #when@test:
 #    doctrine:
