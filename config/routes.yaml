@@ -15,3 +15,7 @@ users:
 todo:
     resource: ../src/Todo/Infrastructure/Controller/
     type: attribute
+
+band:
+    resource: ../src/Band/Infrastructure/Controller/
+    type: attribute

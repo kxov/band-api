@@ -32,6 +32,10 @@ services:
         resource: '../src/Todo/Infrastructure/Controller/'
         tags: [ 'controller.service_arguments' ]
 
+    App\Band\Infrastructure\Controller\:
+        resource: '../src/Band/Infrastructure/Controller/'
+        tags: [ 'controller.service_arguments' ]
+
     App\Shared\Infrastructure\ArgumentResolver\CommandResolver:
         tags:
             - { name: controller.argument_value_resolver, priority: 99 }

@@ -28,7 +28,10 @@ migrations-diff:
 	docker-compose run --rm php-cli php bin/console doctrine:migrations:diff
 
 fixtures-load:
-	docker-compose run --rm php-cli php bin/console doctrine:fixtures:load --no-interaction
+	docker-compose run --rm php-cli php bin/console doctrine:fixtures:load --no-interaction --env=test
+
+create-user:
+	docker-compose run --rm php-cli php bin/console app:users:create-user
 
 schema-validate:
 	docker-compose run --rm php-cli php bin/console doctrine:schema:validate

@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Band\Infrastructure\Domain\Repository;
 
-use App\Band\Domain\Model\Genre;
-use App\Band\Domain\Model\GenreRepository;
+use App\Band\Domain\Model\Band;
+use App\Band\Domain\Model\BandRepositoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
 
-final class DoctrineGenreRepository implements GenreRepository
+final class DoctrineBandRepositoryInterface implements BandRepositoryInterface
 {
     private EntityManagerInterface $em;
 
@@ -17,12 +17,12 @@ final class DoctrineGenreRepository implements GenreRepository
         $this->em = $em;
     }
 
-    public function find(int $id): ?Genre
+    public function find(int $id): ?Band
     {
-        return $this->em->find(Genre::class, $id);
+        return $this->em->find(Band::class, $id);
     }
 
-    public function add(Genre $band): void
+    public function create(Band $band): void
     {
         $this->em->persist($band);
         $this->em->flush();
