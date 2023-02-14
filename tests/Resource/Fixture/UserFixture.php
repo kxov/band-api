@@ -20,11 +20,8 @@ class UserFixture extends Fixture
 
     public function load(ObjectManager $manager)
     {
-//        $email = $this->getFaker()->email();
-//        $password = $this->getFaker()->password();
-
-        $email = 'me@mail.com';
-        $password = '12345';
+        $email = $this->getFaker()->email();
+        $password = $this->getFaker()->password();
 
         $user = $this->userFactory->create($email, $password);
 

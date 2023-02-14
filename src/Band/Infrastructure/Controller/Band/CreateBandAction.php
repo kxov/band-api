@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Band\Infrastructure\Controller;
+namespace App\Band\Infrastructure\Controller\Band;
 
 use App\Band\Application\Command\Band\CreateBandCommand;
 use App\Band\Application\Command\Band\CreateBandCommandHandler;
