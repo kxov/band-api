@@ -16,10 +16,14 @@ class Band
 
     private Collection $genres;
 
+    private Collection $albums;
+
     public function __construct(string $name, DateTimeImmutable $dateCreate)
     {
         $this->name = $name;
         $this->dateCreate = $dateCreate;
         $this->genres = new ArrayCollection();
+        $this->albums = new ArrayCollection();
     }
 }
+

@@ -17,6 +17,11 @@ App\Band\Domain\Model\Band:
         dateCreate:
             type: date_immutable
             nullable: false
+    oneToMany:
+        albums:
+            targetEntity: App\Band\Domain\Model\Album
+            mappedBy: band
+            cascade: [ persist ]
     manyToMany:
         genres:
             targetEntity: App\Band\Domain\Model\Genre

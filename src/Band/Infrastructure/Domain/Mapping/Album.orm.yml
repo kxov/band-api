@@ -1,0 +1,27 @@
+App\Band\Domain\Model\Album:
+    type: entity
+    table: album
+    repositoryClass: App\Band\Infrastructure\Domain\Repository\DoctrineAlbumRepository
+    id:
+        id:
+            type: integer
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            nullable: false
+        dateCreate:
+            type: date_immutable
+            nullable: false
+    manyToOne:
+        band:
+            targetEntity: App\Band\Domain\Model\Band
+            inversedBy: albums
+            joinColumn:
+                name: band_id
+                referencedColumnName: id
+                nullable: false
