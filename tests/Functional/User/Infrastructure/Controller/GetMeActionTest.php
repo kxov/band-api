@@ -4,38 +4,15 @@ declare(strict_types=1);
 
 namespace App\Tests\UI\HTTP\API;
 
-use App\Tests\Tools\FixtureTools;
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use App\Tests\Functional\BaseWebTestCase;
 
-class GetMeActionTest extends WebTestCase
+class GetMeActionTest extends BaseWebTestCase
 {
-    use FixtureTools;
-
     public function test_get_me_action()
     {
-        $client = static::createClient();
-        $user = $this->loadUserFixture();
+        $this->client->request('GET', '/api/users/me');
 
-        $client->request(
-            'POST',
-            '/api/auth/token/login',
-            [],
-            [],
-            ['CONTENT_TYPE' => 'application/json'],
-            json_encode([
-                'email' => $user->getEmail(),
-                'password' => $user->getPassword(),
-            ])
-        );
-        $data = json_decode($client->getResponse()->getContent(), true);
-
-        $client->setServerParameter('HTTP_AUTHORIZATION', sprintf('Bearer %s', $data['token']));
-
-        // act
-        $client->request('GET', '/api/users/me');
-
-        //assert
-        $data = json_decode($client->getResponse()->getContent(), true);
-        $this->assertEquals($user->getEmail(), $data['email']);
+        $data = json_decode($this->client->getResponse()->getContent(), true);
+        $this->assertEquals($this->user->getEmail(), $data['email']);
     }
 }
