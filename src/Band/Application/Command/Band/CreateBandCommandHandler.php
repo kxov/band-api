@@ -19,7 +19,7 @@ class CreateBandCommandHandler
 
     public function handle(CreateBandCommand $command): void
     {
-        $band = new Band($command->name, new \DateTimeImmutable());
+        $band = new Band($command->name, $command->createdAt);
 
         $this->bandRepository->create($band);
     }
