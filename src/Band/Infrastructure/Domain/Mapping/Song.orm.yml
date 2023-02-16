@@ -1,7 +1,7 @@
-App\Band\Domain\Model\Album:
+App\Band\Domain\Model\Song:
     type: entity
-    table: album
-    repositoryClass: App\Band\Infrastructure\Domain\Repository\DoctrineAlbumRepository
+    table: song
+    repositoryClass: App\Band\Infrastructure\Domain\Repository\DoctrineSongRepository
     id:
         id:
             type: integer
@@ -14,19 +14,14 @@ App\Band\Domain\Model\Album:
         name:
             type: string
             nullable: false
-        dateCreate:
-            type: date_immutable
+        time:
+            type: time_immutable
             nullable: false
     manyToOne:
-        band:
-            targetEntity: App\Band\Domain\Model\Band
+        album:
+            targetEntity: App\Band\Domain\Model\Album
             inversedBy: albums
             joinColumn:
-                name: band_id
+                name: album_id
                 referencedColumnName: id
                 nullable: false
-    oneToMany:
-        songs:
-            targetEntity: App\Band\Domain\Model\Song
-            mappedBy: album
-            cascade: [ persist ]

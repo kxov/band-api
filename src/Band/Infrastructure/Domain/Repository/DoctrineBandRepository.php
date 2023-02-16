@@ -8,7 +8,7 @@ use App\Band\Domain\Model\Band;
 use App\Band\Domain\Model\BandRepositoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
 
-final class DoctrineBandRepositoryInterface implements BandRepositoryInterface
+final class DoctrineBandRepository implements BandRepositoryInterface
 {
     private EntityManagerInterface $em;
 

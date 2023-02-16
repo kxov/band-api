@@ -8,7 +8,7 @@ use App\Band\Domain\Model\Genre;
 use App\Band\Domain\Model\GenreRepositoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
 
-final class DoctrineGenreRepositoryInterface implements GenreRepositoryInterface
+final class DoctrineGenreRepository implements GenreRepositoryInterface
 {
     private EntityManagerInterface $em;
 
