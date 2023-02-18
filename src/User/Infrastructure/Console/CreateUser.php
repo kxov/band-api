@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\User\Infrastructure\Console;
 
 use App\User\Domain\Model\UserFactory;
-use App\User\Infrastructure\Repository\UserRepository;
+use App\User\Domain\Model\UserRepositoryInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -19,8 +19,8 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 final class CreateUser extends Command
 {
     public function __construct(
-        private readonly UserRepository $userRepository,
-        private readonly UserFactory $userFactory,
+        private readonly UserRepositoryInterface $userRepository,
+        private readonly UserFactory            $userFactory,
     ) {
         parent::__construct();
     }

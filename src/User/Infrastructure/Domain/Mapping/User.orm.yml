@@ -1,0 +1,24 @@
+App\User\Domain\Model\User:
+    type: entity
+    table: user
+    repositoryClass: App\User\Infrastructure\Domain\Repository\DoctrineUserRepository
+    id:
+        id:
+            type: integer
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        email:
+            type: string
+            nullable: false
+        password:
+            type: string
+            nullable: true
+    oneToMany:
+        todos:
+            targetEntity: App\Todo\Domain\Model\Todo
+            mappedBy: user
+            cascade: [ persist ]

@@ -5,47 +5,16 @@ declare(strict_types=1);
 namespace App\User\Domain\Model;
 
 use App\Shared\Domain\Security\AuthUserInterface;
-use App\Todo\Domain\Model\Todo;
 use App\User\Domain\Service\UserPasswordHasherInterface;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
 
-/**
- * @ORM\Entity()
- * @ORM\Table(name="`user`")
- */
 class User implements AuthUserInterface, \JsonSerializable
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
     private int $id;
-
-    /**
-     * @ORM\Column(type="string", nullable=false)
-     *
-     * @var string
-     */
     private string $email;
-
-    /**
-     * @ORM\Column(type="string", nullable=true)
-     *
-     * @var ?string
-     */
     private ?string $password = null;
-
-    /**
-     * @var Todo[]|ArrayCollection
-     * @ORM\OneToMany(targetEntity="App\Todo\Domain\Model\Todo", mappedBy="user", orphanRemoval=true, cascade={"persist"})
-     */
-    private $todos;
-
-    /**
-     * @return ArrayCollection
-     */
+    private Collection $todos;
 
     public function __construct(string $email)
     {

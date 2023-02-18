@@ -13,8 +13,8 @@ doctrine:
         mappings:
             User:
                 is_bundle: false
-                type: annotation
-                dir: '%kernel.project_dir%/src/User/Domain/Model'
+                type: yml
+                dir: '%kernel.project_dir%/src/User/Infrastructure/Domain/Mapping'
                 prefix: 'App\User\Domain\Model'
                 alias: User
             Todo:

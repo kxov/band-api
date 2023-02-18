@@ -20,7 +20,7 @@ App\Band\Domain\Model\Song:
     manyToOne:
         album:
             targetEntity: App\Band\Domain\Model\Album
-            inversedBy: albums
+            inversedBy: songs
             joinColumn:
                 name: album_id
                 referencedColumnName: id
