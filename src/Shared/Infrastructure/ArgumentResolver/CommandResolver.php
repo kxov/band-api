@@ -40,7 +40,12 @@ class CommandResolver implements ValueResolverInterface
     {
         /** @var class-string $type */
         $type = $argument->getType();
-        $command = $this->serializer->deserialize($request->getContent(), $type, 'json');
+
+        try {
+            $command = $this->serializer->deserialize($request->getContent(), $type, 'json');
+        } catch (\Exception $exception) {
+            throw new ApiException($exception->getMessage());
+        }
 
         $errors = $this->validator->validate($command);
 

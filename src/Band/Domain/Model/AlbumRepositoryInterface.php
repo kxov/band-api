@@ -6,5 +6,5 @@ namespace App\Band\Domain\Model;
 
 interface AlbumRepositoryInterface
 {
-
+    public function create(Album $todo): void;
 }

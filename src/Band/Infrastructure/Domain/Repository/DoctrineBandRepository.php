@@ -6,6 +6,7 @@ namespace App\Band\Infrastructure\Domain\Repository;
 
 use App\Band\Domain\Model\Band;
 use App\Band\Domain\Model\BandRepositoryInterface;
+use App\Shared\Infrastructure\Exception\ModelNotFoundException;
 use Doctrine\ORM\EntityManagerInterface;
 
 final class DoctrineBandRepository implements BandRepositoryInterface
@@ -26,5 +27,14 @@ final class DoctrineBandRepository implements BandRepositoryInterface
     {
         $this->em->persist($band);
         $this->em->flush();
+    }
+
+    public function get(int $id): Band
+    {
+        /** @var Band $todo */
+        if (!$band = $this->em->find(Band::class, $id)) {
+            throw new ModelNotFoundException('Band is not found.');
+        }
+        return $band;
     }
 }

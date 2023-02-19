@@ -22,7 +22,7 @@ final class DoctrineAlbumRepository implements AlbumRepositoryInterface
         return $this->em->find(Album::class, $id);
     }
 
-    public function add(Album $band): void
+    public function create(Album $band): void
     {
         $this->em->persist($band);
         $this->em->flush();

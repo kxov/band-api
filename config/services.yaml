@@ -44,11 +44,5 @@ services:
         tags:
             - { name: kernel.event_listener, event: kernel.exception, priority: 1 }
 
-#    App\User\Domain\Model\UserRepositoryInterface: '@App\User\Infrastructure\Domain\Repository\DoctrineUserRepository'
-#    App\User\Infrastructure\Domain\Repository\DoctrineUserRepository:
-#        factory: [ '@doctrine', getRepository ]
-#        arguments:
-#            - App\User\Domain\Model\User
-
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
