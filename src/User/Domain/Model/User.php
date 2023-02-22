@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\User\Domain\Model;
 
 use App\Shared\Domain\Security\AuthUserInterface;
-use App\User\Domain\Service\UserPasswordHasherInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
@@ -15,7 +14,7 @@ class User implements AuthUserInterface, \JsonSerializable
     private string $email;
     private ?string $password = null;
 
-    private ?Role $role = null;
+    private Role $role;
 
     private Collection $todos;
 
@@ -58,13 +57,9 @@ class User implements AuthUserInterface, \JsonSerializable
         return $this->email;
     }
 
-    public function setPassword(?string $password, UserPasswordHasherInterface $passwordHasher): void
+    public function setPassword(?string $password): void
     {
-        if (is_null($password)) {
-            $this->password = null;
-        }
-
-        $this->password = $passwordHasher->hash($this, $password);
+        $this->password = $password;
     }
 
     public function changeRole(Role $role): void
