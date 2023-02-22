@@ -14,12 +14,16 @@ class User implements AuthUserInterface, \JsonSerializable
     private int $id;
     private string $email;
     private ?string $password = null;
+
+    private ?Role $role = null;
+
     private Collection $todos;
 
     public function __construct(string $email)
     {
         $this->email = $email;
         $this->todos = new ArrayCollection();
+        $this->role = Role::user();
     }
 
     public function getId(): int
@@ -40,7 +44,7 @@ class User implements AuthUserInterface, \JsonSerializable
     public function getRoles(): array
     {
         return [
-            'ROLE_USER',
+           $this->role->getName()
         ];
     }
 
@@ -61,6 +65,14 @@ class User implements AuthUserInterface, \JsonSerializable
         }
 
         $this->password = $passwordHasher->hash($this, $password);
+    }
+
+    public function changeRole(Role $role): void
+    {
+        if ($this->role->isEqual($role)) {
+            throw new \DomainException('Role is already same.');
+        }
+        $this->role = $role;
     }
 
     public function getTodos(): ArrayCollection
