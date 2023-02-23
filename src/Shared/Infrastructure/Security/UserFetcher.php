@@ -14,9 +14,9 @@ class UserFetcher implements UserFetcherInterface
     {
     }
 
-    public function getAuthUser(): AuthUserInterface
+    public function getAuthUser(): UserIdentity
     {
-        /** @var AuthUserInterface $user */
+        /** @var UserIdentity $user */
         $user = $this->security->getUser();
 
         return $user;

@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace App\User\Application\ReadModel\User;
 
+use App\User\Application\Query\View\AuthView;
 use App\User\Domain\Model\User;
 use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\FetchMode;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 
@@ -37,6 +39,25 @@ class UsersShower
 //
 //        return $stmt->fetchAllAssociative();
 //    }
+
+    public function findForAuthByEmail(string $email): ?array
+    {
+        $stmt = $this->connection->createQueryBuilder()
+            ->select(
+                'id',
+                'email',
+                'password',
+                'role',
+            )
+            ->from('user')
+            ->where('email = ?')
+            ->setParameter(0, $email)
+            ->executeQuery();
+
+        $result = $stmt->fetchAssociative();
+
+        return $result ?: null;
+    }
 
     public function getAllList()
     {
