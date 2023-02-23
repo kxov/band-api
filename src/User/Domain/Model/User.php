@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace App\User\Domain\Model;
 
-use App\Shared\Domain\Security\AuthUserInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
-class User implements AuthUserInterface, \JsonSerializable
+class User implements \JsonSerializable
 {
     private int $id;
     private string $email;
@@ -45,11 +44,6 @@ class User implements AuthUserInterface, \JsonSerializable
         return [
            $this->role->getName()
         ];
-    }
-
-    public function eraseCredentials()
-    {
-        // TODO: Implement eraseCredentials() method.
     }
 
     public function getUserIdentifier(): string

@@ -3,10 +3,15 @@ security:
     # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
     password_hashers:
         Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
+        App\Shared\Infrastructure\Security\UserIdentity: auto
+        app_hasher:
+            # the service ID of your custom hasher (the FQCN using the default services.yaml)
+            id: 'App\Shared\Infrastructure\Security\PasswordHasher'
     # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
     providers:
         fetcher:
             id: App\Shared\Infrastructure\Security\UserProvider
+
 #    encoder:
 #        App\Shared\Infrastructure\Security\UserIdentity: native
 #        app_user_provider:
