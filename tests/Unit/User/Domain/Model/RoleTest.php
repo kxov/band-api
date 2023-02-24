@@ -16,10 +16,7 @@ class RoleTest extends TestCase
 
         $user->changeRole(Role::admin());
 
-        $roles = $user->getRoles();
-
-        self::assertEquals(reset($roles), Role::ADMIN);
-
-        //self::assertTrue($user->getRoles()->isAdmin());
+        self::assertFalse($user->getRole()->isUser());
+        self::assertTrue($user->getRole()->isAdmin());
     }
 }

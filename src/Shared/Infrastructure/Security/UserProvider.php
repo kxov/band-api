@@ -41,22 +41,22 @@ class UserProvider implements UserProviderInterface
         return $class instanceof UserIdentity;
     }
 
-    private function loadUser(string $email): array
+    private function loadUser(string $email): AuthView
     {
-        if ($user = $this->users->findForAuthByEmail($email)) {
-            return $user;
+        if ($authView = $this->users->findForAuthByEmail($email)) {
+            return $authView;
         }
 
         throw new UserNotFoundException('');
     }
 
-    private static function identityByUser(array $user): UserIdentity
+    private static function identityByUser(AuthView $authView): UserIdentity
     {
         return new UserIdentity(
-            $user['id'],
-            $user['email'],
-            $user['password'] ?: '',
-            $user['role'] ?: 'ROLE_USER',
+            $authView->id,
+            $authView->email,
+            $authView->hash ?: '',
+            $authView->role ?: 'ROLE_USER',
         );
     }
 }

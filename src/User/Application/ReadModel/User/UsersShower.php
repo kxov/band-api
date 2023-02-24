@@ -40,7 +40,7 @@ class UsersShower
 //        return $stmt->fetchAllAssociative();
 //    }
 
-    public function findForAuthByEmail(string $email): ?array
+    public function findForAuthByEmail(string $email): ?AuthView
     {
         $stmt = $this->connection->createQueryBuilder()
             ->select(
@@ -56,7 +56,7 @@ class UsersShower
 
         $result = $stmt->fetchAssociative();
 
-        return $result ?: null;
+        return $result ? AuthView::fromArray($result) : null;
     }
 
     public function getAllList()

@@ -14,13 +14,6 @@ class UserFactory
 
     public function create(string $email, string $password): User
     {
-        $user = new User($email);
-
-        $hashedPass = $this->passwordHasher->hash($password);
-        //$password = $this->passwordHasher->hash($user, $password);
-
-        $user->setPassword($hashedPass);
-
-        return $user;
+        return new User($email, $this->passwordHasher->hash($password));
     }
 }

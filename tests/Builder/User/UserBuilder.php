@@ -17,6 +17,8 @@ class UserBuilder
     private string $email;
     private string $pass;
 
+    private string $hash;
+
     private ?Role $role = null;
 
     public function __construct()
@@ -26,6 +28,8 @@ class UserBuilder
         $this->email = RandomGenerateValue::getEmail();
 
         $this->pass = RandomGenerateValue::getSmallString();
+
+        $this->hash = RandomGenerateValue::getSmallString();
     }
 
     public function withRole(Role $role): self
@@ -38,7 +42,7 @@ class UserBuilder
     public function build(): User
     {
         $user = new User(
-            $this->email
+            $this->email, $this->hash
         );
 
         if ($this->role) {

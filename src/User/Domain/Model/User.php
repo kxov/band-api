@@ -17,9 +17,10 @@ class User implements \JsonSerializable
 
     private Collection $todos;
 
-    public function __construct(string $email)
+    public function __construct(string $email, string $password)
     {
         $this->email = $email;
+        $this->password = $password;
         $this->todos = new ArrayCollection();
         $this->role = Role::user();
     }
@@ -39,21 +40,9 @@ class User implements \JsonSerializable
         return $this->password;
     }
 
-    public function getRoles(): array
+    public function getRole(): Role
     {
-        return [
-           $this->role->getName()
-        ];
-    }
-
-    public function getUserIdentifier(): string
-    {
-        return $this->email;
-    }
-
-    public function setPassword(?string $password): void
-    {
-        $this->password = $password;
+        return $this->role;
     }
 
     public function changeRole(Role $role): void
