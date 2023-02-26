@@ -2,7 +2,7 @@ up: docker-up
 down: docker-down
 restart: docker-down docker-up
 
-init: docker-down-clear docker-pull docker-build docker-up
+init: docker-down-clear docker-pull docker-build docker-up v-init
 
 v-init: composer-install migrations-install
 

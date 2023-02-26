@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Functional;
 
+use App\Band\Domain\Model\Band;
 use App\Tests\Tools\FixtureTools;
 use App\User\Domain\Model\User;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
@@ -19,12 +20,15 @@ class BaseWebTestCase extends WebTestCase
 
     protected User $user;
 
+    protected Band $band;
+
     protected function setUp(): void
     {
         parent::setUp();
+
         $this->client = static::createClient();
 
-        $this->user = $this->loadUserFixture();
+        list($this->user, $this->band) = $this->loadFixtures();
 
         $this->client->request(
             'POST',
@@ -40,6 +44,7 @@ class BaseWebTestCase extends WebTestCase
         $data = json_decode($this->client->getResponse()->getContent(), true);
 
         $this->jwtToken = $data['token'];
+
         $this->client->setServerParameter('HTTP_AUTHORIZATION', sprintf('Bearer %s', $this->jwtToken));
     }
 }

@@ -29,9 +29,15 @@ final class DoctrineBandRepository implements BandRepositoryInterface
         $this->em->flush();
     }
 
+    public function remove(Band $band): void
+    {
+        $this->em->remove($band);
+        $this->em->flush();
+    }
+
     public function get(int $id): Band
     {
-        /** @var Band $todo */
+        /** @var Band $band */
         if (!$band = $this->em->find(Band::class, $id)) {
             throw new ModelNotFoundException('Band is not found.');
         }

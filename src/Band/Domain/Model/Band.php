@@ -18,12 +18,21 @@ class Band
 
     private Collection $albums;
 
-    public function __construct(string $name, DateTimeImmutable $dateCreate)
+    public function __construct(string $name, ?DateTimeImmutable $dateCreate = null)
     {
         $this->name = $name;
-        $this->dateCreate = $dateCreate;
+        $this->dateCreate = $dateCreate ?? new DateTimeImmutable();
         $this->genres = new ArrayCollection();
         $this->albums = new ArrayCollection();
     }
+
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
 }
 

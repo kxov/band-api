@@ -8,4 +8,5 @@ interface BandRepositoryInterface
 {
     public function create(Band $band): void;
     public function find(int $id): ?Band;
+    public function remove(Band $band): void;
 }
