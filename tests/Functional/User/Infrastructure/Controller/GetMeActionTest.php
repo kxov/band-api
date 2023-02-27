@@ -13,6 +13,6 @@ class GetMeActionTest extends BaseWebTestCase
         $this->client->request('GET', '/api/users/me');
 
         $data = json_decode($this->client->getResponse()->getContent(), true);
-        $this->assertEquals($this->user->getEmail(), $data['email']);
+        $this->assertEquals(self::$user->getEmail(), $data['email']);
     }
 }
