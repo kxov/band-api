@@ -16,10 +16,13 @@ class CreateBandCommand implements CommandInterface
      */
     public string $name;
 
+    /**
+     * @Assert\Type("\DateTimeInterface")
+     */
     public DateTimeImmutable $createdAt;
 
     public function __construct()
     {
-        $this->createdAt = new DateTimeImmutable();
+        $this->createdAt = $this->createdAt ?? new DateTimeImmutable();
     }
 }

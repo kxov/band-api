@@ -12,6 +12,7 @@ class Band
 {
     private int $id;
     private string $name;
+
     private DateTimeImmutable $dateCreate;
 
     private Collection $genres;
@@ -34,5 +35,26 @@ class Band
         return $this->id;
     }
 
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return DateTimeImmutable
+     */
+    public function getDateCreate(): DateTimeImmutable
+    {
+        return $this->dateCreate;
+    }
+
+    public function update(string $name, DateTimeImmutable $dateCreate): void
+    {
+        $this->name = $name;
+        $this->dateCreate = $dateCreate;
+    }
 }
 
