@@ -7,7 +7,7 @@ namespace App\User\Domain\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
-class User implements \JsonSerializable
+class User //implements \JsonSerializable
 {
     private int $id;
     private string $email;
@@ -15,13 +15,10 @@ class User implements \JsonSerializable
 
     private Role $role;
 
-    private Collection $todos;
-
     public function __construct(string $email, string $password)
     {
         $this->email = $email;
         $this->password = $password;
-        $this->todos = new ArrayCollection();
         $this->role = Role::user();
     }
 
@@ -53,24 +50,19 @@ class User implements \JsonSerializable
         $this->role = $role;
     }
 
-    public function getTodos(): ArrayCollection
-    {
-        return $this->todos;
-    }
-
-    public function jsonSerialize(): array
-    {
-        $user = [
-            'id' => $this->id,
-            'name' => $this->email,
-            'todos' => []
-        ];
-
-        foreach($this->todos as $todo)
-        {
-            $user['todos'][] = $todo->jsonSerialize();
-        }
-
-        return $user;
-    }
+//    public function jsonSerialize(): array
+//    {
+//        $user = [
+//            'id' => $this->id,
+//            'name' => $this->email,
+//            'todos' => []
+//        ];
+//
+//        foreach($this->todos as $todo)
+//        {
+//            $user['todos'][] = $todo->jsonSerialize();
+//        }
+//
+//        return $user;
+//    }
 }

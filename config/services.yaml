@@ -24,14 +24,6 @@ services:
         resource: '../src/User/Infrastructure/Controller/'
         tags: [ 'controller.service_arguments' ]
 
-    App\TodoList\Infrastructure\Controller\:
-        resource: '../src/TodoList/Infrastructure/Controller/'
-        tags: [ 'controller.service_arguments' ]
-
-    App\Todo\Infrastructure\Controller\:
-        resource: '../src/Todo/Infrastructure/Controller/'
-        tags: [ 'controller.service_arguments' ]
-
     App\Band\Infrastructure\Controller\:
         resource: '../src/Band/Infrastructure/Controller/'
         tags: [ 'controller.service_arguments' ]

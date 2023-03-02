@@ -17,8 +17,8 @@ class DeleteBandCommandHandler
 
     public function handle(DeleteBandCommand $command): void
     {
-        $todo = $this->bandRepository->get($command->id);
+        $band = $this->bandRepository->get($command->id);
 
-        $this->bandRepository->remove($todo);
+        $this->bandRepository->remove($band);
     }
 }

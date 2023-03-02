@@ -20,18 +20,6 @@ doctrine:
                 dir: '%kernel.project_dir%/src/User/Infrastructure/Domain/Mapping'
                 prefix: 'App\User\Domain\Model'
                 alias: User
-            Todo:
-                is_bundle: false
-                type: annotation
-                dir: '%kernel.project_dir%/src/Todo/Domain/Model'
-                prefix: 'App\Todo\Domain\Model'
-                alias: Todo
-            TodoList:
-                is_bundle: false
-                type: annotation
-                dir: '%kernel.project_dir%/src/TodoList/Domain/Model'
-                prefix: 'App\TodoList\Domain\Model'
-                alias: TodoList
             RefreshToken:
                 is_bundle: false
                 type: annotation
@@ -44,11 +32,6 @@ doctrine:
                 prefix: 'App\Band\Domain\Model'
                 dir: '%kernel.project_dir%/src/Band/Infrastructure/Domain/Mapping'
 
-#when@test:
-#    doctrine:
-#        dbal:
-#            # "TEST_TOKEN" is typically set by ParaTest
-#            dbname_suffix: '_test%env(default::TEST_TOKEN)%'
 
 when@prod:
     doctrine:

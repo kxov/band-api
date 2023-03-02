@@ -61,9 +61,9 @@ class UsersShower
 
     public function getAllList()
     {
-        $qb = $this->repository->createQueryBuilder('u')
-            ->join('u.todos', 't')
-            ->addSelect('t');
+        $qb = $this->repository->createQueryBuilder('u');
+            //->join('u.todos', 't')
+            //->addSelect('t');
 
         return $qb->getQuery()->getResult();
     }

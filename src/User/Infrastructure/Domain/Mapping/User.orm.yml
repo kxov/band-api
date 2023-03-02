@@ -19,8 +19,3 @@ App\User\Domain\Model\User:
             nullable: true
         role:
             type: user_user_role
-    oneToMany:
-        todos:
-            targetEntity: App\Todo\Domain\Model\Todo
-            mappedBy: user
-            cascade: [ persist ]
