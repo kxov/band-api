@@ -31,7 +31,7 @@ class UpdateBandCommand implements CommandInterface
         return array_filter([
             'id' => $this->id,
             'name' => $this->name,
-            'dateCreate' => $this->dateCreate->format('d/m/Y')
+            'dateCreate' => $this->dateCreate?->format('d/m/Y')
         ]);
     }
 }

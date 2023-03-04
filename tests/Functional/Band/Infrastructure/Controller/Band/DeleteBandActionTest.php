@@ -15,8 +15,6 @@ class DeleteBandActionTest extends BaseWebTestCase
 
     public function test_post()
     {
-
-
         $this->client->request(Request::METHOD_POST, '/api/band/delete');
 
         self::assertEquals(405, $this->client->getResponse()->getStatusCode());
