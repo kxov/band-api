@@ -4,17 +4,12 @@ declare(strict_types=1);
 
 namespace App\Band\Application\Command\Album;
 
-use App\Shared\Application\Command\CommandInterface;
+use App\Shared\Application\Command\Command;
 use DateTimeImmutable;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class CreateAlbumCommand implements CommandInterface
+class CreateAlbumCommand extends Command
 {
-    /**
-     * @Assert\NotBlank()
-     */
-    public int $bandId;
-
     /**
      * @var string
      * @Assert\NotBlank()

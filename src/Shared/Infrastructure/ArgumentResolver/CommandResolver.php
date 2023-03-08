@@ -9,6 +9,7 @@ use App\Shared\Infrastructure\Exception\ApiException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Controller\ValueResolverInterface;
 use Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
+use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
@@ -17,18 +18,17 @@ class CommandResolver implements ValueResolverInterface
     private ValidatorInterface $validator;
     private SerializerInterface $serializer;
 
-    public function __construct(ValidatorInterface $validator, SerializerInterface $serializer)
+    private RouterInterface $router;
+
+    public function __construct(
+        ValidatorInterface $validator,
+        SerializerInterface $serializer,
+        RouterInterface $router
+    )
     {
         $this->validator = $validator;
         $this->serializer = $serializer;
-    }
-
-    public function supports(Request $request, ArgumentMetadata $argument): bool
-    {
-        /** @var class-string $type */
-        $type = $argument->getType();
-
-        return is_subclass_of($type, CommandInterface::class);
+        $this->router = $router;
     }
 
     /**
@@ -40,6 +40,10 @@ class CommandResolver implements ValueResolverInterface
     {
         /** @var class-string $type */
         $type = $argument->getType();
+
+        if (!is_subclass_of($type, CommandInterface::class)) {
+            return [];
+        }
 
         try {
             $command = $this->serializer->deserialize($request->getContent(), $type, 'json');
@@ -55,6 +59,19 @@ class CommandResolver implements ValueResolverInterface
             throw new ApiException($json);
         }
 
+        $routeParams = $request->attributes->get('_route_params');
+
+        if (\count($routeParams) > 0) {
+            $this->addRouteParams($command, $routeParams);
+        }
+
         yield $command;
+    }
+
+    private function addRouteParams(CommandInterface $command, array $routeParams)
+    {
+        foreach ($routeParams as $paramName => $paramValue) {
+            $command->{$paramName} = (int)$paramValue;
+        }
     }
 }

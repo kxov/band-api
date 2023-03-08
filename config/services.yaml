@@ -30,7 +30,7 @@ services:
 
     App\Shared\Infrastructure\ArgumentResolver\CommandResolver:
         tags:
-            - { name: controller.argument_value_resolver, priority: 99 }
+            - { name: controller.argument_value_resolver, priority: 102 }
 
     App\Shared\Infrastructure\Listener\ApiExceptionListener:
         tags:

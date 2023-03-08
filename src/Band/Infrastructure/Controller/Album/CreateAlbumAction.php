@@ -10,7 +10,7 @@ use App\Shared\Infrastructure\Exception\ApiException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/api/album/create', methods: ['POST'])]
+#[Route('/api/band/{bandId}/album/create', requirements: ['bandId' => '\d+'], methods: ['POST'])]
 final class CreateAlbumAction
 {
     private CreateAlbumCommandHandler $createAlbumCommandHandler;
@@ -20,7 +20,7 @@ final class CreateAlbumAction
         $this->createAlbumCommandHandler = $createAlbumCommandHandler;
     }
 
-    public function __invoke(CreateAlbumCommand $createBandCommand): JsonResponse
+    public function __invoke(int $bandId, CreateAlbumCommand $createBandCommand): JsonResponse
     {
         try {
             $this->createAlbumCommandHandler->handle($createBandCommand);

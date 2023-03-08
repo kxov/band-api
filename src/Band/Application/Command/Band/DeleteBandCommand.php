@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace App\Band\Application\Command\Band;
 
-use App\Shared\Application\Command\CommandInterface;
-use DateTimeImmutable;
+use App\Shared\Application\Command\Command;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class DeleteBandCommand implements CommandInterface
+class DeleteBandCommand extends Command
 {
     /**
      * @Assert\NotBlank()

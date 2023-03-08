@@ -18,12 +18,17 @@ class Album
 
     private Collection $songs;
 
-    public function __construct(string $name, DateTimeImmutable $dateCreate, Band $band)
+    public function __construct(Band $band, string $name, DateTimeImmutable $dateCreate)
     {
         $this->name = $name;
         $this->dateCreate = $dateCreate;
         $this->band = $band;
 
         $this->songs = new ArrayCollection();
+    }
+
+    public function isNameEqual(string $name): bool
+    {
+        return $this->name === $name;
     }
 }

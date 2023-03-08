@@ -27,6 +27,16 @@ class Band
         $this->albums = new ArrayCollection();
     }
 
+    public function releaseAlbum(string $albumName, ?DateTimeImmutable $dateCreate = null): void
+    {
+        foreach ($this->albums as $album) {
+            if ($album->isNameEqual($albumName)) {
+                throw new \DomainException('Album already exists.');
+            }
+        }
+        $this->albums->add(new Album($this, $albumName, $dateCreate));
+    }
+
     /**
      * @return int
      */
