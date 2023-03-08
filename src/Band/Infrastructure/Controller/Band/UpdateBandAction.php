@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Band\Infrastructure\Controller\Band;
 
 use App\Band\Application\Command\Band\UpdateBandCommand;
-use App\Band\Application\Command\Band\UpdateBandCommandHandler;
+use App\Shared\Application\Command\CommandBusInterface;
 use App\Shared\Infrastructure\Exception\ApiException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,17 +13,17 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/api/band/update', methods: ['POST'])]
 class UpdateBandAction
 {
-    private UpdateBandCommandHandler $updateBandCommandHandler;
+    private CommandBusInterface $commandBus;
 
-    public function __construct(UpdateBandCommandHandler $updateBandCommandHandler)
+    public function __construct(CommandBusInterface $commandBus)
     {
-        $this->updateBandCommandHandler = $updateBandCommandHandler;
+        $this->commandBus = $commandBus;
     }
 
     public function __invoke(UpdateBandCommand $updateBandCommand): JsonResponse
     {
         try {
-            $this->updateBandCommandHandler->handle($updateBandCommand);
+            $this->commandBus->execute($updateBandCommand);
         } catch (\Exception $e) {
             throw new ApiException($e->getMessage());
         }

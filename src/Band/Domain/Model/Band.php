@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace App\Band\Domain\Model;
 
+use App\Shared\Domain\Model\Aggregate;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use DateTimeImmutable;
 
-class Band
+class Band extends Aggregate
 {
     private int $id;
     private string $name;
@@ -35,6 +36,8 @@ class Band
             }
         }
         $this->albums->add(new Album($this, $albumName, $dateCreate));
+
+
     }
 
     /**

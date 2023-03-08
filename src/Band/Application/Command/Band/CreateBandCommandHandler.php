@@ -6,8 +6,9 @@ namespace App\Band\Application\Command\Band;
 
 use App\Band\Domain\Model\Band;
 use App\Band\Domain\Model\BandRepositoryInterface;
+use App\Shared\Application\Command\CommandHandlerInterface;
 
-class CreateBandCommandHandler
+class CreateBandCommandHandler implements CommandHandlerInterface
 {
     private BandRepositoryInterface $bandRepository;
 
@@ -17,7 +18,7 @@ class CreateBandCommandHandler
         $this->bandRepository = $bandRepository;
     }
 
-    public function handle(CreateBandCommand $command): void
+    public function __invoke(CreateBandCommand $command): void
     {
         $band = new Band($command->name, $command->createdAt);
 

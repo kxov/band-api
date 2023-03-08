@@ -20,6 +20,19 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
 
+    _instanceof:
+        App\Shared\Application\Command\CommandHandlerInterface:
+            tags:
+                - { name: messenger.message_handler, bus: command.bus }
+
+        App\Shared\Application\Query\QueryHandlerInterface:
+            tags:
+                - { name: messenger.message_handler, bus: query.bus }
+
+        App\Shared\Domain\Event\EventHandlerInterface:
+            tags:
+                - { name: messenger.message_handler, bus: event.bus }
+
     App\User\Infrastructure\Controller\:
         resource: '../src/User/Infrastructure/Controller/'
         tags: [ 'controller.service_arguments' ]
@@ -35,6 +48,3 @@ services:
     App\Shared\Infrastructure\Listener\ApiExceptionListener:
         tags:
             - { name: kernel.event_listener, event: kernel.exception, priority: 1 }
-
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones

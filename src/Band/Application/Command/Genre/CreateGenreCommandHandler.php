@@ -6,8 +6,9 @@ namespace App\Band\Application\Command\Genre;
 
 use App\Band\Domain\Model\Genre;
 use App\Band\Domain\Model\GenreRepositoryInterface;
+use App\Shared\Application\Command\CommandHandlerInterface;
 
-class CreateGenreCommandHandler
+class CreateGenreCommandHandler implements CommandHandlerInterface
 {
     private GenreRepositoryInterface $genreRepository;
 
@@ -17,7 +18,7 @@ class CreateGenreCommandHandler
         $this->genreRepository = $genreRepository;
     }
 
-    public function handle(CreateGenreCommand $command): void
+    public function __invoke(CreateGenreCommand $command): void
     {
         $genre = new Genre($command->name);
 

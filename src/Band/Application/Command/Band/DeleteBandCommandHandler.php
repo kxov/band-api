@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace App\Band\Application\Command\Band;
 
 use App\Band\Domain\Model\BandRepositoryInterface;
+use App\Shared\Application\Command\CommandHandlerInterface;
 
-class DeleteBandCommandHandler
+class DeleteBandCommandHandler implements CommandHandlerInterface
 {
     private BandRepositoryInterface $bandRepository;
 
@@ -15,7 +16,7 @@ class DeleteBandCommandHandler
         $this->bandRepository = $bandRepository;
     }
 
-    public function handle(DeleteBandCommand $command): void
+    public function __invoke(DeleteBandCommand $command): void
     {
         $band = $this->bandRepository->get($command->id);
 

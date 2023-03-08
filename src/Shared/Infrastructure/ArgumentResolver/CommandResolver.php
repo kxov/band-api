@@ -71,7 +71,7 @@ class CommandResolver implements ValueResolverInterface
     private function addRouteParams(CommandInterface $command, array $routeParams)
     {
         foreach ($routeParams as $paramName => $paramValue) {
-            $command->{$paramName} = (int)$paramValue;
+            $command->{$paramName} = is_numeric($paramValue) ? (int)$paramValue : $paramValue;
         }
     }
 }

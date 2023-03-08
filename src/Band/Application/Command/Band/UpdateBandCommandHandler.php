@@ -5,11 +5,12 @@ declare(strict_types=1);
 namespace App\Band\Application\Command\Band;
 
 use App\Band\Domain\Model\BandRepositoryInterface;
+use App\Shared\Application\Command\CommandHandlerInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
-class UpdateBandCommandHandler
+class UpdateBandCommandHandler implements CommandHandlerInterface
 {
     private BandRepositoryInterface $bandRepository;
 
@@ -28,7 +29,7 @@ class UpdateBandCommandHandler
         $this->denormalizer = $denormalizer;
     }
 
-    public function handle(UpdateBandCommand $command): void
+    public function __invoke(UpdateBandCommand $command): void
     {
         $band = $this->bandRepository->get($command->id);
 

@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\Band\Application\Command\Album;
+namespace App\Band\Application\Command\Band\Album;
 
 use App\Shared\Application\Command\Command;
 use DateTimeImmutable;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class CreateAlbumCommand extends Command
+class ReleaseAlbumCommand extends Command
 {
     /**
      * @var string
