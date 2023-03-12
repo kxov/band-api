@@ -26,7 +26,7 @@ final class ReleaseAlbumCommandHandler implements CommandHandlerInterface
     {
         $band = $this->bandRepository->get($command->bandId);
 
-        $band->releaseAlbum($command->name, $command->createdAt);
+        $band->releaseAlbum($command->albumName, $command->createdAt);
 
         $this->entityManager->flush();
     }

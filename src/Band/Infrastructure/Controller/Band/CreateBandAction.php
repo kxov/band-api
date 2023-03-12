@@ -5,9 +5,7 @@ declare(strict_types=1);
 namespace App\Band\Infrastructure\Controller\Band;
 
 use App\Band\Application\Command\Band\CreateBandCommand;
-use App\Band\Application\Command\Band\CreateBandCommandHandler;
 use App\Shared\Application\Command\CommandBusInterface;
-use App\Shared\Infrastructure\Bus\CommandBus;
 use App\Shared\Infrastructure\Exception\ApiException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;

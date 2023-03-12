@@ -14,7 +14,7 @@ class ReleaseAlbumCommand extends Command
      * @var string
      * @Assert\NotBlank()
      */
-    public string $name;
+    public string $albumName;
 
     public DateTimeImmutable $createdAt;
 
