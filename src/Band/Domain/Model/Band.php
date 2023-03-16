@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Band\Domain\Model;
 
+use App\Band\Domain\Event\ReleaseBandAlbumEvent;
 use App\Shared\Domain\Model\Aggregate;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -37,7 +38,7 @@ class Band extends Aggregate
         }
         $this->albums->add(new Album($this, $albumName, $dateCreate));
 
-
+        $this->raise(new ReleaseBandAlbumEvent($albumName));
     }
 
     /**

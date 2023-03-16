@@ -7,6 +7,7 @@ namespace App\Shared\Infrastructure\Doctrine;
 use App\Shared\Application\Event\EventBusInterface;
 use App\Shared\Domain\Model\Aggregate;
 use Doctrine\Common\EventSubscriber;
+use Doctrine\ORM\Event\OnFlushEventArgs;
 use Doctrine\ORM\Event\PostFlushEventArgs;
 use Doctrine\ORM\Events;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
@@ -35,6 +36,7 @@ final class DomainEventSubscriber implements EventSubscriber
             Events::postUpdate,
             Events::postRemove,
             Events::postFlush,
+            Events::onFlush,
         ];
     }
 
@@ -43,9 +45,16 @@ final class DomainEventSubscriber implements EventSubscriber
         $this->keepAggregateRoots($args);
     }
 
-    public function postUpdate(LifecycleEventArgs $args): void
+    public function onFlush(OnFlushEventArgs $args): void
     {
-        $this->keepAggregateRoots($args);
+        $om = $args->getObjectManager();
+        $uw = $om->getUnitOfWork();
+
+        foreach ($uw->getScheduledCollectionUpdates() as $collection) {
+            $entity = $collection->getOwner();
+
+            $this->entities[] = $entity;
+        }
     }
 
     public function postRemove(LifecycleEventArgs $args): void
