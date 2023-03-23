@@ -33,7 +33,6 @@ final class DomainEventSubscriber implements EventSubscriber
     {
         return [
             Events::postPersist,
-            Events::postUpdate,
             Events::postRemove,
             Events::postFlush,
             Events::onFlush,
