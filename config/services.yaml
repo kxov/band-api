@@ -48,10 +48,6 @@ services:
         resource: '../src/Band/Infrastructure/Controller/'
         tags: [ 'controller.service_arguments' ]
 
-    App\Shared\Infrastructure\ArgumentResolver\CommandResolver:
-        tags:
-            - { name: controller.argument_value_resolver, priority: 102 }
-
     App\Shared\Infrastructure\Listener\ApiExceptionListener:
         tags:
             - { name: kernel.event_listener, event: kernel.exception, priority: 1 }

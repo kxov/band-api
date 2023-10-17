@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace App\Band\Application\Command\Band\Album;
 
-use App\Shared\Application\Command\Command;
 use DateTimeImmutable;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class ReleaseAlbumCommand extends Command
+class ReleaseAlbumCommand
 {
     /**
      * @var string
@@ -17,6 +16,8 @@ class ReleaseAlbumCommand extends Command
     public string $albumName;
 
     public DateTimeImmutable $createdAt;
+
+    public ?int $bandId = null;
 
     public function __construct()
     {

@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace App\Band\Application\Command\Band;
 
-use App\Shared\Application\Command\Command;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class UpdateBandCommand extends Command
+class UpdateBandCommand
 {
     /**
      * @Assert\NotBlank()
@@ -16,7 +15,7 @@ class UpdateBandCommand extends Command
     public int $id;
 
     /**
-     * @var string
+     * @var string|null
      * @Assert\Type("string")
      */
     public ?string $name = null;

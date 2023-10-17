@@ -15,10 +15,12 @@ class UpdateBandActionTest extends BaseWebTestCase
     {
         $band = $this->loadFixtures(BandFixture::class, true);
 
-        $this->client->request(Request::METHOD_POST, '/api/band/update', [], [], [], json_encode([
-            'id' => $band->getId(),
-            'name' => $newBandName = RandomGenerateValue::getName()
-        ]));
+        $this->client->jsonRequest(Request::METHOD_POST, '/api/band/update',
+            [
+                'id' => $band->getId(),
+                'name' => RandomGenerateValue::getName()
+            ]
+        );
 
         self::assertEquals(200, $this->client->getResponse()->getStatusCode());
     }

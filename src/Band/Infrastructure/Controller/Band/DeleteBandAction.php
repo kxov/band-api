@@ -8,6 +8,7 @@ use App\Band\Application\Command\Band\DeleteBandCommand;
 use App\Shared\Application\Command\CommandBusInterface;
 use App\Shared\Infrastructure\Exception\ApiException;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/api/band/delete', methods: ['DELETE'])]
@@ -20,7 +21,7 @@ final class DeleteBandAction
         $this->commandBus = $commandBus;
     }
 
-    public function __invoke(DeleteBandCommand $deleteBandCommand): JsonResponse
+    public function __invoke(#[MapRequestPayload] DeleteBandCommand $deleteBandCommand): JsonResponse
     {
         try {
             $this->commandBus->execute($deleteBandCommand);

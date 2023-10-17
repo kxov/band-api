@@ -8,6 +8,7 @@ use App\Band\Application\Command\Band\UpdateBandCommand;
 use App\Shared\Application\Command\CommandBusInterface;
 use App\Shared\Infrastructure\Exception\ApiException;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/api/band/update', methods: ['POST'])]
@@ -20,7 +21,7 @@ class UpdateBandAction
         $this->commandBus = $commandBus;
     }
 
-    public function __invoke(UpdateBandCommand $updateBandCommand): JsonResponse
+    public function __invoke(#[MapRequestPayload] UpdateBandCommand $updateBandCommand): JsonResponse
     {
         try {
             $this->commandBus->execute($updateBandCommand);

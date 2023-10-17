@@ -10,6 +10,9 @@ use App\Tests\Tools\FixtureTools;
 use App\Tests\Unit\Util\RandomGenerateValue;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * @group releaseAlbum
+ */
 class ReleaseAlbumActionTest extends BaseWebTestCase
 {
     use FixtureTools;
@@ -18,9 +21,7 @@ class ReleaseAlbumActionTest extends BaseWebTestCase
     {
         $band = $this->loadFixtures(BandFixture::class, true);
 
-        $this->client->request(Request::METHOD_POST, sprintf('/api/band/%d/album/release', $band->getId()), [], [], [], json_encode([
-            'albumName' => RandomGenerateValue::getName(),
-        ]));
+        $this->client->jsonRequest(Request::METHOD_POST, sprintf('/api/band/%d/album/release', $band->getId()), ['albumName' => RandomGenerateValue::getName()]);
 
         self::assertEquals(201, $this->client->getResponse()->getStatusCode());
     }
